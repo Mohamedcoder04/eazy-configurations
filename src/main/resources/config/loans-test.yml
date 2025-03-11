@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "test"
+
+build:
+  version: "2.0"
+
+accounts:
+  message: "Welcome to EazyBank accounts related test APIs "
+  contactDetails:
+    name: "Smitha Ray - Test Lead"
+    email: "smitha@eazybank.com"
+  onCallSupport:
+    - (666) 265-3765
+    - (666) 734-8371

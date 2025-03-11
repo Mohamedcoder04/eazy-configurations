@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: configserver
+  profiles:
+    active: git
+  # native est utlisé seulement lorsqu'on enregistre notre configuration avec file ou classpath
+    #active: native
+  cloud:
+    config:
+      server:
+#        native:
+#          #search-locations: classpath:/config
+#          #  Reading configurations from a file system location
+#          search-locations: file:///D://PROJETS//SPRING_BOOT//master-microservices//section%206//v2-spring-cloud-config//configserver//src//main//resources//config
+        git:
+          uri: https://github.com/eazybytes/eazybytes-config.git  # URL du dépôt Git contenant les fichiers de configuration
+          default-label: main  # Branche par défaut utilisée pour récupérer les configurations
+          timeout: 5  # Délai d'attente (en secondes) avant expiration lors de la récupération des fichiers depuis le repo
+          clone-on-start: true  # Permet de cloner le dépôt dès le démarrage du service de configuration
+          force-pull: true  # Force la récupération des dernières modifications même si un clone existe déjà localement
+# vous devez utiliser http://localhost:8071/encrypt pour encrypter vos properties
+# envoyer dans le body de type text
+# après dans la application.yml de chaque microservice
+# utiliser dans la properties "{cipher}resultat_de_l'encryption"
+# aussi pour decrypt utiliser http://localhost:8071/decrypt
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+
+management:
+  endpoint:
+    web:
+      exposure:
+        include: "*"
+
+encrypt:
+  key: "45D81EC1EF61DF9AD8D3E5BB397F9"
+
+server:
+  port: 8071
